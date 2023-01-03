@@ -17,12 +17,22 @@ console.log(Userdata.age)
 const response = await SymptomService.symptomsDiagonsis(Userdata.age,Userdata.Gender,data.data.mentions[0].id)
 
   // const response = await SymptomService.storeSymptom(req.query.userId,data.data.mentions[0].id);
+  if(response.data.question.items.length > 0){
+    const names = []
+    for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
+      names.push({
+        "title": `${response.data.question.items[i].name}`,
+        "message": `${response.data.question.items[i].name}`
+      })
+    }
+  
   res.status(200).json({
     message: "Successfull",
     success: true,
+    items : names,
     data: response.data.question,
-  });
-  // console.log(CheckObj);
+    });
+  }// console.log(CheckObj);
 };
 
 // console.log(CheckObj.age)
