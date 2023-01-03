@@ -81,9 +81,9 @@ let timeout;
 // }
 
 const getDefaultSymptoms = async (req, res) => {
-  
+  console.log(req.query.userId)
   let Userdata = await userInfo.data(req.query.userId);
-
+console.log(Userdata)
   let temp = [];
 
   const response = await getSymptomsData(

@@ -61,11 +61,11 @@ const DiagonsisData = async(arr,sex,age)=>{
 
 const getSymptomsData = async (url, age) => {
 
-    // const cachedData = cache.get(age);
-    // if (cachedData) {
+    const cachedData = cache.get(age);
+    if (cachedData) {
   
-    //   return cachedData;
-    // }
+      return cachedData;
+    }
   
    
     const response = await axios.get(url, {
@@ -77,12 +77,12 @@ const getSymptomsData = async (url, age) => {
     headers: {
         Accept: 'application/json',
         'Dev-Mode': 'true',
-        'App-Key': API_KEY,
-        'App-Id': API_ID,
+        'App-Key':"ed31ef2357c0a91740327294a146c97d" ,
+        'App-Id': "6b2c1128",
       }
   });
   
-    // cache.set(age, response.data);
+    cache.set(age, response.data);
   
     return response.data;
   };
