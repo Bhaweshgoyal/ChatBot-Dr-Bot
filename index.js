@@ -8,7 +8,7 @@ const { Gender } = require("./routes/sex.route");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-let port = 5008;
+let port = 8080;
 Gender(app)
 age(app)
 getSymptoms(app);
