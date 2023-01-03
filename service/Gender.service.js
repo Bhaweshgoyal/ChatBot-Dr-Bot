@@ -11,7 +11,7 @@ const gender = (sex , userId) => {
     method: "post",
     url: "https://services.kommunicate.io/rest/ws/user/update",
     headers: {
-      "Api-Key": `0kuoMau1XUapWDTLWk0kgF5zHskvrqow`,
+      "Api-Key": `${process.env.Kommunicat_Key}`,
       "Of-User-Id":`${userId}`,
       "Content-Type": "application/json",
       Cookie: "JSESSIONID=899ECC009FC10D593EA5BE9F6029B6C4",

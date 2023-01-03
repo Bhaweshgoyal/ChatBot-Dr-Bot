@@ -57,15 +57,44 @@ const DiagonsisData = async(arr,sex,age)=>{
 
 }
 
-
+const storeSymptom = async(data , userId)=>{
+    var data = JSON.stringify({
+        metadata: {
+          symptom: [...data],
+        },  
+      });
+    
+      var config = {
+        method: "post",
+        url: "https://services.kommunicate.io/rest/ws/user/update",
+        headers: {
+          "Api-Key": `${process.env.Kommunicat_Key}`,
+          "Of-User-Id": `${userId}`,
+          "Content-Type": "application/json",
+          Cookie: "JSESSIONID=1D59FBEEB2E7A536228F72549E152FE1",
+        },
+        data: data,
+      };
+    
+      var response = axios(config)
+        .then(function (response) {
+          //   console.log(JSON.stringify(response.data));
+          return response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    console.log(response)
+      return response;
+}
 
 const getSymptomsData = async (url, age) => {
 
-    const cachedData = cache.get(age);
-    if (cachedData) {
+    // const cachedData = cache.get(age);
+    // if (cachedData) {
   
-      return cachedData;
-    }
+    //   return cachedData;
+    // }
   
    
     const response = await axios.get(url, {
@@ -77,15 +106,15 @@ const getSymptomsData = async (url, age) => {
     headers: {
         Accept: 'application/json',
         'Dev-Mode': 'true',
-        'App-Key':"ed31ef2357c0a91740327294a146c97d" ,
-        'App-Id': "6b2c1128",
+        'App-Key': API_KEY,
+        'App-Id': API_ID,
       }
   });
   
-    cache.set(age, response.data);
+    // cache.set(age, response.data);
   
     return response.data;
   };
   
 
-module.exports = {symptomsData , DiagonsisData , getSymptomsData} 
+module.exports = {symptomsData , DiagonsisData , getSymptomsData , storeSymptom} 
