@@ -1,33 +1,19 @@
 const { default: axios } = require("axios");
 const {
-  symptomsData,
-  DiagonsisData,
+ 
   getSymptomsData,
 } = require("../service/symptomsData.service");
-const SymptomService = require("../service/symptomsData.service");
+const SymptomService = require("../service/symptomStore.service");
 const userInfo = require("../service/userDetails");
 
 const SymptomStore = async (req, res) => {
-  // console.log(req.body.userId);
+  
   console.log(req.query.userId);
   console.log(req.query.symptoms);
   var Userdata = await userInfo.data(req.query.userId);
-
-  console.log(Userdata,"UserdataUserdataUserdataUserdataUserdataUserdataUserdataUserdataUserdataUserdata");
 console.log(Userdata.age)
-  let data = await symptomsData(req.query.symptoms, Userdata.age);
-  // // if (!CheckObj.symptoms.includes(data.data.mentions[0].id) && CheckObj.age) {
-  //   // if (CheckObj.symptoms.length > 2) {
-  //     // CheckObj.symptoms.shift();
-  //     CheckObj.symptoms.push(data.data.mentions[0].id);
-  //   // } else if (CheckObj.age) {
-  //     // console.log(data.data.mentions[0]);
-  //     CheckObj.symptoms.push({
-  //       id: data.data.mentions[0].id,
-  //       choice_id: data.data.mentions[0].choice_id,
-  //     });
-
-  const response = await SymptomService.storeSymptom(data.data.mentions[0].id);
+  let data = await SymptomService.symptomsData(req.query.symptoms, Userdata.age);
+  const response = await SymptomService.storeSymptom(req.query.userId,data.data.mentions[0].id);
   res.status(200).json({
     message: "Successfull",
     success: true,
@@ -67,17 +53,17 @@ console.log(Userdata.age)
 // };
 // }
 
-const diagonsis = async (arr, sex, age) => {
-  let response = await DiagonsisData(arr, sex, age);
-  if (response) {
-    return response.data;
-  } else {
-    console.log("no response ----------");
-  }
-  // console.log(response.data);
-};
+// const diagonsis = async (arr, sex, age) => {
+//   let response = await DiagonsisData(arr, sex, age);
+//   if (response) {
+//     return response.data;
+//   } else {
+//     console.log("no response ----------");
+//   }
+//   // console.log(response.data);
+// };
 
-let timeout;
+
 
 // const debouncedGetDefaultSymptoms = async (req, res) => {
 //   clearTimeout(timeout);

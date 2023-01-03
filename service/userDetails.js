@@ -23,8 +23,9 @@ const data = async (userId) => {
   });
   const config = createConfig(data);
   const response = await axios(config);
-  // const obj = response.data.response[0].metadata;
-  return response;
+  // console.log(response , "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+  const obj = response.data.response[0].metadata;
+  return obj;
 };
 
 module.exports = {
