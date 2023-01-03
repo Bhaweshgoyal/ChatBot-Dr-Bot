@@ -17,7 +17,7 @@ console.log(Userdata.age)
 const response = await SymptomService.symptomsDiagonsis(Userdata.age,Userdata.Gender,data.data.mentions[0].id)
 
   // const response = await SymptomService.storeSymptom(req.query.userId,data.data.mentions[0].id);
-  if(response.data.question.items.length > 0){
+  if(response && response.data.question.items.length > 0){
     const names = []
     for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
       names.push({
