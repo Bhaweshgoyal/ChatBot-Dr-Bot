@@ -2,6 +2,7 @@ var axios = require("axios");
 require("dotenv").config();
 const storeSymptom = async (userId, symptoms) => {
     console.log(userId)
+    temp = []
   var data = JSON.stringify({
     metadata: {
       "symptoms": `${symptoms}`,
@@ -58,6 +59,37 @@ const symptomsData = async(text , age)=>{
     return response
 }
 
+const symptomsDiagonsis = async(age,Gender,id)=>{
+    var data = JSON.stringify({
+        "sex": `${Gender}`,
+        "age": {
+          "value": age
+        },
+        "evidence": [
+          {
+            "id": `${id}`,
+            "choice_id": "present",
+            "source": "initial"
+          }
+        ]
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://api.infermedica.com/v3/diagnosis',
+        headers: { 
+          'App-Id': `${process.env.api_id}`, 
+          'App-Key': `${process.env.API_key}`, 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+ const response = await axios(config)
+ console.log(response , "+++++++++++++++++++++++++++++++++++++++++++++++++++++ , responseresponseresponseresponseresponseresponseresponseresponse")
+ return response
+}
+
 module.exports = {
-    storeSymptom , symptomsData
+    storeSymptom , symptomsData , symptomsDiagonsis
 }

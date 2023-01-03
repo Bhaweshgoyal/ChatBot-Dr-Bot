@@ -13,11 +13,14 @@ const SymptomStore = async (req, res) => {
   var Userdata = await userInfo.data(req.query.userId);
 console.log(Userdata.age)
   let data = await SymptomService.symptomsData(req.query.symptoms, Userdata.age);
-  const response = await SymptomService.storeSymptom(req.query.userId,data.data.mentions[0].id);
+
+const response = await SymptomService.symptomsDiagonsis(Userdata.age,Userdata.Gender,data.data.mentions[0].id)
+
+  // const response = await SymptomService.storeSymptom(req.query.userId,data.data.mentions[0].id);
   res.status(200).json({
     message: "Successfull",
     success: true,
-    data: response,
+    data: response.data.question,
   });
   // console.log(CheckObj);
 };
