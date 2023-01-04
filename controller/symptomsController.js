@@ -27,7 +27,7 @@ const response = await SymptomService.symptomsDiagonsis("token",Userdata.age,Use
         "message": `${response.data.question.items[i].name}`,
         "replyMetadata": {
          "id" : `${response.data.question.items[i].id}`,
-         "KM_TRIGGER_EVENT" : "Default Fallback Intent"
+         "KM_TRIGGER_EVENT" : "Default Fallback"
       }
       }
       )
