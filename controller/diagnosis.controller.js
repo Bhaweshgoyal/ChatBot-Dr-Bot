@@ -42,7 +42,7 @@ console.log(req.query.s_id)
             //   }
             //   )
             // }
-          
+          console.log(response.data.conditions[0], "response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]")
           res.status(200).json({
             message: "Successfull",
             success: true,
