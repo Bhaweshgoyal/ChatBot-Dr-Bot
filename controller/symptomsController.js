@@ -99,15 +99,17 @@ const getDefaultSymptoms = async (req, res) => {
     "https://api.infermedica.com/v3/symptoms",
     Userdata.age
   );
-
+// Changed were done here 
   for (let i = 0; i < response.length; i++) {
-    temp.push(response[i].name);
+    temp.push({name : response[i].name ,    "replyMetadata": {
+            "KM_TRIGGER_EVENT" : "symptoms Intent"
+   }});
   }
 
   // console.log(temp);
   return res.status(200).json({
     // data: response.data.map((item) => item.name),
-    data: temp,
+    data: {},
     message: "Successfully Got all the names",
     success: true,
   });
