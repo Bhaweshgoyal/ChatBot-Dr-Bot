@@ -28,55 +28,26 @@ take response from inline code all the the options and put them absent and choos
  */
 const UserData = await data(req.query.userId);
 console.log(req.query.s_id)
+console.log(req.query.s_id)
     const response = await symptomsDiagonsis(UserData.token,UserData.age , UserData.Gender ,req.query.s_id )
-    // if(response || response.data.question !== null && response.data.question.item.length>0 ){
-    //     const names = []
-    //     for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
-    //       names.push({
-    //         "title": `${response.data.question.items[i].name}`,
-    //         "message": `${response.data.question.items[i].name}`
-    //       })
-    //     }
-      
-    //   res.status(200).json({
-    //     message: "Successfull",
-    //     success: true,
-    //     items : names,
-    //     data: response.data.question,
-    //     });
-    //   }
-      // else
-      //  if(response.data.conditions){
-            
-      // res.status(200).json({
-      //   message: "Successfull",
-      //   success: true,
-      //   // items : names,
-      //   data: response.data.conditions,
-      //   });
-      // }
-     
-      // else{
-        // const dataSymptom = await symptomsData(req.query. , UserData.age)
-        // const response = await symptomsDiagonsis(UserData.token,UserData.age , UserData.Gender ,s_id)
-        if(response && response.data.question.items.length > 0 ){
-            const names = []
-            for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
-              names.push({
-                "title": `${response.data.question.items[i].name}`,
-                "message": `${response.data.question.items[i].name}`,
-                "replyMetadata": {
-                 "id" : `${response.data.question.items[i].id}`
-              }
-              }
-              )
-            }
+        if(response.data.conditions.common_name !== undefined || response.data.conditions.common_name !== null){
+            // const names = []
+            // for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
+            //   names.push({
+            //     "title": `${response.data.question.items[i].name}`,
+            //     "message": `${response.data.question.items[i].name}`,
+            //     "replyMetadata": {
+            //      "id" : `${response.data.question.items[i].id}`
+            //   }
+            //   }
+            //   )
+            // }
           
           res.status(200).json({
             message: "Successfull",
             success: true,
-            items : names,
-            data: response.data.question,
+            // items : names,
+            data: response.data.conditions[0].common_name,
             });
         }else{
          return res.status(200).json({
