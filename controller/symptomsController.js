@@ -24,8 +24,12 @@ const response = await SymptomService.symptomsDiagonsis("token",Userdata.age,Use
     for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
       names.push({
         "title": `${response.data.question.items[i].name}`,
-        "message": `${response.data.question.items[i].name}`
-      })
+        "message": `${response.data.question.items[i].name}`,
+        "replyMetadata": {
+         "id" : `${response.data.question.items[i].id}`
+      }
+      }
+      )
     }
   
   res.status(200).json({
