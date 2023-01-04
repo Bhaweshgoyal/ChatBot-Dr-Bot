@@ -59,35 +59,36 @@ const symptomsData = async(text , age)=>{
     return response
 }
 
-const symptomsDiagonsis = async(age,Gender,id)=>{
-    var data = JSON.stringify({
-        "sex": `${Gender}`,
-        "age": {
-          "value": age
-        },
-        "evidence": [
-          {
-            "id": `${id}`,
-            "choice_id": "present",
-            "source": "initial"
-          }
-        ]
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://api.infermedica.com/v3/diagnosis',
-        headers: { 
-          'App-Id': `${process.env.api_id}`, 
-          'App-Key': `${process.env.API_key}`, 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
- const response = await axios(config)
- console.log(response , "+++++++++++++++++++++++++++++++++++++++++++++++++++++ , responseresponseresponseresponseresponseresponseresponseresponse")
+const symptomsDiagonsis = async(token,age,Gender,id)=>{
+// we have to add multiple evidence although also as by making array and putting that into evidence || or puting answer in present format
+var data = JSON.stringify({
+  sex: `${Gender}`,
+  age: {
+    value: Number(age)
+  },
+  evidence: [
+    {
+      "id": `${id}`,
+      "choice_id": "present"
+    }
+  ]
+});
+
+var config = {
+  method: 'post',
+  url: 'https://api.infermedica.com/v3/diagnosis',
+  headers: { 
+    'App-Id': '6b2c1128', 
+    'App-Key': 'ed31ef2357c0a91740327294a146c97d', 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+const response = await axios(config)
+
  return response
+
 }
 
 module.exports = {

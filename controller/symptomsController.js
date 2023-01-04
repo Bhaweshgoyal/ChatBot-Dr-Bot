@@ -1,4 +1,5 @@
 const { default: axios } = require("axios");
+const { token } = require("../service/interviewToken.service");
 const {
  
   getSymptomsData,
@@ -7,15 +8,16 @@ const SymptomService = require("../service/symptomStore.service");
 const userInfo = require("../service/userDetails");
 
 const SymptomStore = async (req, res) => {
-  
   console.log(req.query.userId);
   console.log(req.query.symptoms);
   var Userdata = await userInfo.data(req.query.userId);
-console.log(Userdata.age)
+console.log(Userdata.Gender)
   let data = await SymptomService.symptomsData(req.query.symptoms, Userdata.age);
-
-const response = await SymptomService.symptomsDiagonsis(Userdata.age,Userdata.Gender,data.data.mentions[0].id)
-
+console.log(data.data.mentions[0].id)
+const response = await SymptomService.symptomsDiagonsis("token",Userdata.age,Userdata.Gender,data.data.mentions[0].id)
+// const token = await token(req.query.userId , response.data.interview_token)
+// req["interview_token"] = response.data.interview_token
+// console.log(req[`${req.query.userId}`] , "helllllllllllllllllllllllllllllllllllllllllllllllllllllllllloooooooooo")
   // const response = await SymptomService.storeSymptom(req.query.userId,data.data.mentions[0].id);
   if(response && response.data.question.items.length > 0){
     const names = []
