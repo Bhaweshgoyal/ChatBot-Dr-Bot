@@ -30,18 +30,7 @@ const UserData = await data(req.query.userId);
 console.log(req.query.s_id)
 console.log(req.query.s_id)
     const response = await symptomsDiagonsis(UserData.token,UserData.age , UserData.Gender ,req.query.s_id )
-        if(response.data.conditions.common_name !== undefined || response.data.conditions.common_name !== null){
-            // const names = []
-            // for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
-            //   names.push({
-            //     "title": `${response.data.question.items[i].name}`,
-            //     "message": `${response.data.question.items[i].name}`,
-            //     "replyMetadata": {
-            //      "id" : `${response.data.question.items[i].id}`
-            //   }
-            //   }
-            //   )
-            // }
+        if(response.data.conditions[0]){
           console.log(response.data.conditions[0], "response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]response.data.conditions[0]")
           res.status(200).json({
             message: "Successfull",
@@ -51,7 +40,7 @@ console.log(req.query.s_id)
             });
         }else{
          return res.status(200).json({
-            message :"Please Go to near by doctor",
+            message :"Please Go to near by doctor there is no mentioned symptom like  in our system",
             success : true
           })
         }
