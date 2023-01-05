@@ -13,7 +13,7 @@ const SymptomStore = async (req, res) => {
   var Userdata = await userInfo.data(req.query.userId);
 console.log(Userdata.Gender)
   let data = await SymptomService.symptomsData(req.query.symptoms, Userdata.age);
-console.log(data.data.mentions[0].id)
+// console.log(data.data.mentions[0].id)
 const response = await SymptomService.symptomsDiagonsis("token",Userdata.age,Userdata.Gender,data.data.mentions[0].id)
 // const token = await token(req.query.userId , response.data.interview_token)
 // req["interview_token"] = response.data.interview_token
@@ -42,53 +42,6 @@ const response = await SymptomService.symptomsDiagonsis("token",Userdata.age,Use
   }// console.log(CheckObj);
 };
 
-// console.log(CheckObj.age)
-// if (CheckObj.symptoms.length >= 3) {
-//   var { question } = await diagonsis(
-//     CheckObj.symptoms,
-//     CheckObj.sex,
-//     CheckObj.age
-//   );
-  //  console.log(question.text , "QQQQQQQQQQQQQQQQQQQQQq")
-// }
-//   let symptomsSize = CheckObj.symptoms.length;
-
-//   // let ans = CheckObj.symptoms.join(" and ");
-
-//   if (question) {
-//     return res.status(200).json({
-//       message: "Successflly Added the symptoms",
-//       success: true,
-//       // data: ans,
-//       data: [question.text, question.items],
-//       len: symptomsSize,
-//     });
-//   } else {
-//     return res.status(201).json({
-//       message: "Not Getting Any value",
-//       success: false,
-//       len: symptomsSize,
-//     });
-//   }
-// };
-// }
-
-// const diagonsis = async (arr, sex, age) => {
-//   let response = await DiagonsisData(arr, sex, age);
-//   if (response) {
-//     return response.data;
-//   } else {
-//     console.log("no response ----------");
-//   }
-//   // console.log(response.data);
-// };
-
-
-
-// const debouncedGetDefaultSymptoms = async (req, res) => {
-//   clearTimeout(timeout);
-//   timeout = setTimeout(() => getDefaultSymptoms(req, res), 3000);
-// }
 
 const getDefaultSymptoms = async (req, res) => {
   let Userdata = await userInfo.data(req.query.userId);
@@ -101,7 +54,18 @@ const getDefaultSymptoms = async (req, res) => {
   );
 
   for (let i = 0; i < response.length; i++) {
-    temp.push(response[i].name);
+
+    // here temp got changed so please go through if its not going to work
+    // temp.push(response[i].name);
+    temp.push({
+      "searchKey":response[i].name,
+      "name" :response[i].name,
+      "metadata":{
+        "replyMetadata": {
+      //  "id" : `${response.data.question.items[i].id}`, 
+       "KM_TRIGGER_EVENT" : "symptoms"
+    }}
+    })
   }
 
   // console.log(temp);
