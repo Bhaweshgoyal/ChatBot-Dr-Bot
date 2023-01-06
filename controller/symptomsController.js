@@ -1,9 +1,6 @@
 const { default: axios } = require("axios");
-const { token } = require("../service/interviewToken.service");
-const {
- 
-  getSymptomsData,
-} = require("../service/symptomsData.service");
+// const { token } = require("../service/interviewToken.service");
+const {getSymptomsData} = require("../service/symptomsData.service");
 const SymptomService = require("../service/symptomStore.service");
 const userInfo = require("../service/userDetails");
 
@@ -15,10 +12,6 @@ console.log(Userdata.Gender)
   let data = await SymptomService.symptomsData(req.query.symptoms, Userdata.age);
 // console.log(data.data.mentions[0].id)
 const response = await SymptomService.symptomsDiagonsis("token",Userdata.age,Userdata.Gender,data.data.mentions[0].id)
-// const token = await token(req.query.userId , response.data.interview_token)
-// req["interview_token"] = response.data.interview_token
-// console.log(req[`${req.query.userId}`] , "helllllllllllllllllllllllllllllllllllllllllllllllllllllllllloooooooooo")
-  // const response = await SymptomService.storeSymptom(req.query.userId,data.data.mentions[0].id);
   if(response && response.data.question.items.length > 0){
     const names = []
     for(let  i = 0 ; i <response.data.question.items.length ;i++ ){
@@ -42,7 +35,6 @@ const response = await SymptomService.symptomsDiagonsis("token",Userdata.age,Use
   }// console.log(CheckObj);
 };
 
-
 const getDefaultSymptoms = async (req, res) => {
   let Userdata = await userInfo.data(req.query.userId);
 
@@ -60,9 +52,10 @@ const getDefaultSymptoms = async (req, res) => {
     temp.push({
       "searchKey":response[i].name,
       "name" :response[i].name,
+      
       "metadata":{
+        "random" : "1",
         "replyMetadata": {
-      //  "id" : `${response.data.question.items[i].id}`, 
        "KM_TRIGGER_EVENT" : "symptoms"
     }}
     })
