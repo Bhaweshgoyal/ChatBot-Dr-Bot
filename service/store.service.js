@@ -1,9 +1,9 @@
-var axios = require("axios");
-require("dotenv").config();
-const age = (userId, age) => {
+const axios = require("axios");
+require("dotenv").config()
+const store = (symptoms , userId) => {
   var data = JSON.stringify({
     metadata: {
-      age: `${age}`,
+      symptoms: `${symptoms}`,
     },
   });
 
@@ -30,7 +30,6 @@ const age = (userId, age) => {
 
   return response;
 };
-
 module.exports = {
-  age,
-};
+    store
+}

@@ -2,7 +2,6 @@ var axios = require("axios");
 require("dotenv").config();
 const storeSymptom = async (userId, symptoms) => {
     console.log(userId)
-    temp = []
   var data = JSON.stringify({
     metadata: {
       "symptoms": `${symptoms}`,
@@ -13,7 +12,7 @@ const storeSymptom = async (userId, symptoms) => {
     method: "post",
     url: "https://services.kommunicate.io/rest/ws/user/update",
     headers: {
-      "Api-Key": `${process.env.Kommunicat_Key}`,
+      "Api-Key": `${process.env.Kommunicate_Key}`,
       "Of-User-Id": `${userId}`,
       "Content-Type": "application/json",
     },
@@ -48,7 +47,7 @@ const symptomsData = async(text , age)=>{
         url: 'https://api.infermedica.com/v3/parse',
         headers: { 
           'App-Id': process.env.api_id, 
-          'App-Key': process.env.API_key, 
+          'App-Key': process.env.api_key, 
           'Content-Type': 'application/json'
         },
         data : data
@@ -69,7 +68,8 @@ var data = JSON.stringify({
   evidence: [
     {
       "id": `${id}`,
-      "choice_id": "present"
+      "choice_id": "present",
+      "source" : "initial"
     }
   ]
 });

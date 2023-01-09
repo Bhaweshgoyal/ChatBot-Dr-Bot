@@ -1,6 +1,6 @@
 require("dotenv").config();
 var axios = require("axios");
-const API_KEY = process.env.Kommunicat_Key;
+const API_KEY = process.env.Kommunicate_Key;
 const API_URL = "https://services.kommunicate.io/rest/ws/user/v2/detail";
 
 const createConfig = (data) => ({
